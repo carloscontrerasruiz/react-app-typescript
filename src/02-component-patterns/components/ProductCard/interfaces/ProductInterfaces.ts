@@ -1,8 +1,12 @@
-import { ReactElement } from "react";
+import { ReactElement, CSSProperties } from "react";
 
-export interface ProductCardProps {
-  product: Product;
+interface GenralPropsComponent {
+  className?: string;
   children?: ReactElement | ReactElement[];
+  style?: CSSProperties;
+}
+export interface ProductCardProps extends GenralPropsComponent {
+  product: Product;
 }
 export interface Product {
   id: string;
@@ -13,4 +17,15 @@ export interface ProductContextProps {
   counter: number;
   product: Product;
   incresedBy: (value: number) => void;
+}
+
+export interface ProductTitleComponent extends GenralPropsComponent {
+  title?: string;
+}
+
+export interface ProductImageComponent extends GenralPropsComponent {
+  img?: string;
+}
+export interface ProductButtonsComponent extends GenralPropsComponent {
+  img?: string;
 }

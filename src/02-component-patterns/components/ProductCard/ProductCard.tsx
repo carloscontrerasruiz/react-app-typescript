@@ -5,15 +5,17 @@ import {
   ProductContextProps,
   ProductCardProps,
 } from "./interfaces/ProductInterfaces";
-import { ProductImage } from "./childComponents/ProductImage";
-import { ProductTitle } from "./childComponents/ProductTitle";
-import { ProductButtons } from "./childComponents/ProductButtons";
 
 export const ProductContext = createContext({} as ProductContextProps);
 
 const { Provider } = ProductContext;
 
-export const ProductCard = ({ product, children }: ProductCardProps) => {
+export const ProductCard = ({
+  product,
+  children,
+  className,
+  style,
+}: ProductCardProps) => {
   const { counter, incresedBy } = useProduct();
   return (
     <Provider
@@ -23,7 +25,7 @@ export const ProductCard = ({ product, children }: ProductCardProps) => {
         product,
       }}
     >
-      <div className={styles.productCard}>
+      <div className={`${styles.productCard} ${className}`} style={style}>
         {children}
         {/* <ProductImage img={product.img} />
       <ProductTitle title={product.title} />
