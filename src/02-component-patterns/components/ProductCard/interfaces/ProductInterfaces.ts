@@ -7,6 +7,9 @@ interface GenralPropsComponent {
 }
 export interface ProductCardProps extends GenralPropsComponent {
   product: Product;
+  //onChange?: (product: Product, count: number) => void;
+  onChange?: (args: Args) => void;
+  value?: number;
 }
 export interface Product {
   id: string;
@@ -28,4 +31,9 @@ export interface ProductImageComponent extends GenralPropsComponent {
 }
 export interface ProductButtonsComponent extends GenralPropsComponent {
   img?: string;
+}
+
+export interface Args {
+  product: Product;
+  count: number;
 }
