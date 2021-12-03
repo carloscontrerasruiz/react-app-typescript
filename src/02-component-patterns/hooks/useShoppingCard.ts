@@ -30,7 +30,6 @@ export const useShoppingCard = () => {
     count: number;
     product: Product;
   }) => {
-    console.log("productchange", count, product);
     setShoppingCart((oldState) => {
       const productInCard: ProductInCart = oldState[product.id] || {
         ...product,
