@@ -2,7 +2,8 @@ import { ReactElement, CSSProperties } from "react";
 
 interface GenralPropsComponent {
   className?: string;
-  children?: ReactElement | ReactElement[];
+  //children?: ReactElement | ReactElement[];
+  children?: (args: ProductCardHandlers) => JSX.Element;
   style?: CSSProperties;
 }
 export interface ProductCardProps extends GenralPropsComponent {
@@ -10,7 +11,14 @@ export interface ProductCardProps extends GenralPropsComponent {
   //onChange?: (product: Product, count: number) => void;
   onChange?: (args: Args) => void;
   value?: number;
+  initialValues?: InitialValues;
 }
+
+export interface InitialValues {
+  count?: number;
+  maxCount?: number;
+}
+
 export interface Product {
   id: string;
   title: string;
@@ -19,6 +27,7 @@ export interface Product {
 export interface ProductContextProps {
   counter: number;
   product: Product;
+  maxCount?: number;
   incresedBy: (value: number) => void;
 }
 
@@ -36,4 +45,13 @@ export interface ProductButtonsComponent extends GenralPropsComponent {
 export interface Args {
   product: Product;
   count: number;
+}
+
+export interface ProductCardHandlers {
+  count: number;
+  isMaxCountReached: boolean;
+  maxCount?: number;
+  product: Product;
+  incresedBy: (value: number) => void;
+  reset: () => void;
 }

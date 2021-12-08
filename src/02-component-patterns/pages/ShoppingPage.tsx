@@ -28,33 +28,6 @@ export const ShoppingPage = () => {
     [key: string]: ProductInCart;
   }>({});
 
-  const onProductCountChange = ({
-    count,
-    product,
-  }: {
-    count: number;
-    product: Product;
-  }) => {
-    console.log("productchange", count, product);
-    setShoppingCart((oldState) => {
-      if (count === 0) {
-        const { [product.id]: toDelete, ...rest } = oldState;
-        console.log({ toDelete });
-        return rest;
-      }
-
-      return {
-        ...shoppingCart,
-        [product.id]: {
-          ...product,
-          count,
-        },
-      };
-    });
-
-    console.log(shoppingCart);
-  };
-
   return (
     <div>
       <h1>Shopping store</h1>
@@ -66,36 +39,25 @@ export const ShoppingPage = () => {
           flexWrap: "wrap",
         }}
       >
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            className="bg-dark text-white"
-            onChange={(e) => onProductCountChange(e)}
-            value={shoppingCart[product.id]?.count || 0}
-          >
-            <ProductImage className="custom-image" />
-            <ProductTitle className="text-white" />
-            <ProductButtons className="custom-buttons" />
-          </ProductCard>
-        ))}
-      </div>
-
-      <div className="shopping-cart" style={{ width: "100px" }}>
-        {Object.entries(shoppingCart).map((productInCart) => (
-          <ProductCard
-            key={productInCart[0]}
-            product={productInCart[1]}
-            className="bg-dark text-white"
-            style={{ width: "100%" }}
-            value={productInCart[1].count}
-            onChange={onProductCountChange}
-          >
-            <ProductImage className="custom-image" />
-            <ProductTitle className="text-white" />
-            <ProductButtons className="custom-buttons" />
-          </ProductCard>
-        ))}
+        <ProductCard
+          key={product.id}
+          product={product}
+          className="bg-dark text-white"
+          initialValues={{
+            count: 4,
+            maxCount: 10,
+          }}
+        >
+          {({ reset, incresedBy }) => (
+            <>
+              <ProductImage className="custom-image" />
+              <ProductTitle className="text-white" />
+              <ProductButtons className="custom-buttons" />
+              <button onClick={reset}>Reset</button>
+              <button onClick={() => incresedBy(2)}>+2</button>
+            </>
+          )}
+        </ProductCard>
       </div>
     </div>
   );
